@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:id="@+id/strHealth"
+        android:text="View Health Records"
+        />
+
+    <!-- RecyclerView for Health Records -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_health"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/strHealth"
+        android:layout_above="@id/fab_add_health_record"
+        android:paddingTop="16dp" />
+
+    <!-- FloatingActionButton for Adding New Health Record -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_health_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Add Health Record" />
+
+</RelativeLayout>

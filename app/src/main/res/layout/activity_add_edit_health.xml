@@ -1,0 +1,88 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    android:text="Add Animal Health Info"
+    android:layout_marginBottom="12dp"/>
+    <!-- Livestock Spinner -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select animal by name here"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_livestock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"
+        />
+
+    <!-- Health Status Input -->
+    <EditText
+        android:id="@+id/edit_text_health_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Health Status"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Treatment Administered Input -->
+    <EditText
+        android:id="@+id/edit_text_treatment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Treatment Administered"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Veterinarian Name Input -->
+    <EditText
+        android:id="@+id/edit_text_vet_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Veterinarian Name"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Veterinarian Phone Input -->
+    <EditText
+        android:id="@+id/edit_text_vet_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Veterinarian Phone Number"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date of next appointment below"
+        android:layout_gravity="center"
+        android:textSize="20sp"/>
+
+    <!-- DatePicker for Next Checkup Date -->
+    <DatePicker
+        android:id="@+id/date_picker_next_checkup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="true"
+        android:datePickerMode="spinner" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#C9FF5722"
+        android:layout_height="wrap_content"
+        android:text="Save" />
+
+</LinearLayout>

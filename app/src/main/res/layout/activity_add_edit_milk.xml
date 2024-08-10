@@ -1,0 +1,86 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Milk Record"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Select animal by name here"
+    android:textSize="20sp"
+    android:layout_gravity="center"/>
+    <!-- Livestock Spinner -->
+    <Spinner
+        android:id="@+id/spinner_livestock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edittext_bg"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date below"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
+
+    <!-- DatePicker for Production Date -->
+    <DatePicker
+        android:id="@+id/date_picker_production_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="true"
+        android:datePickerMode="spinner"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Time of Milking"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
+
+    <!-- TimePicker for Session Time -->
+    <TimePicker
+        android:id="@+id/time_picker_session"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Quantity Input -->
+    <EditText
+        android:id="@+id/edit_text_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Milk Quantity (Liters)"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="15dp"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:backgroundTint="#C9FF5722"/>
+
+
+    </LinearLayout>
+</ScrollView>

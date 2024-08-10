@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Breeding Info"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Female Livestock Spinner -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select animal by name here"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_female_livestock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"
+         />
+
+    <!-- Male Livestock Spinner -->
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Select the male animal of breeding"
+    android:textSize="20sp"
+    android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_male_livestock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/edittext_bg"/>
+
+    <!-- DatePicker for Breeding Date -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date of Breeding"
+        android:layout_gravity="center"
+        android:textSize="20sp"/>
+
+    <DatePicker
+        android:id="@+id/date_picker_breeding_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:calendarViewShown="true"
+        android:datePickerMode="spinner" />
+
+    <!-- Expected Due Date TextView -->
+    <TextView
+        android:id="@+id/text_view_expected_due_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Expected Due Date"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:layout_marginBottom="12dp"
+        android:textStyle="bold"
+        android:paddingTop="16dp" />
+
+    <!-- Method Spinner -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breeding Method"
+        android:textSize="20sp"
+        android:layout_marginTop="12dp"
+        android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:backgroundTint="#C9FF5722"/>
+
+</LinearLayout>

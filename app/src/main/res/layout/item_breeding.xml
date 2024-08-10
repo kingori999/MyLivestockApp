@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@drawable/edittext_bg">
+
+    <TextView
+        android:id="@+id/text_view_female_livestock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Female Livestock"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_view_male_livestock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_female_livestock_name"
+        android:text="Male Livestock"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_breeding_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_male_livestock_name"
+        android:text="Breeding Date"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_expected_due_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_breeding_date"
+        android:text="Expected Due Date"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/text_view_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_expected_due_date"
+        android:text="Breeding Method"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#C9FF5722"
+        android:layout_alignParentEnd="true"
+
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_edit"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#C9FF5722"
+        android:text="Delete" />
+</RelativeLayout>

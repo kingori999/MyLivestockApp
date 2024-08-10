@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="horizontal"
+    android:background="@drawable/edittext_bg">
+
+
+
+
+    <TextView
+        android:id="@+id/text_view_livestock_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Livestock Name"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_view_feed_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_livestock_name"
+        android:text="Feed Type"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_quantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_feed_type"
+        android:text="Quantity"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_view_date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_quantity"
+        android:text="Date And Time"
+        android:textSize="16sp" />
+
+
+
+
+
+    <Button
+        android:id="@+id/button_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="#C9FF5722"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/button_edit"
+        android:backgroundTint="#C9FF5722"
+        android:text="Delete" />
+
+</RelativeLayout>

@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Milk Records"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:id="@+id/strMilk"/>
+
+    <!-- RecyclerView for Milk Records -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_milk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/fab_add_milk_record"
+        android:paddingTop="16dp"
+        android:layout_below="@+id/strMilk"/>
+
+    <!-- FloatingActionButton for Adding New Milk Record -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_milk_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="#C9FF5722"
+        android:contentDescription="Add Milk Record" />
+
+</RelativeLayout>

@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Livestock Management</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register_here">Don\'t have an account? Register here</string>
+    <string name="login_here">Already have an account? Login here</string>
+    <string name="livestock_inventory">Livestock Inventory</string>
+    <string name="nutrition_management">Nutrition Management</string>
+    <string name="health_management">Health Management</string>
+    <string name="breeding_management">Breeding Management</string>
+    <string name="task_assignment_tracking">Task Assignment And Tracking</string>
+    <string name="reporting_analytics">Reporting And Analytics</string>
+    <string name="milk_inventory_management">Milk Inventory Management</string>
+    <string name="admin_section">Admin Section</string>
+    <string name="livestock_id">Livestock ID</string>
+    <string name="mating_date">Mating Date</string>
+    <string name="expected_birth_date">Expected Birth Date</string>
+    <string name="health_status">Health Status</string>
+    <string name="treatment_administered">Treatment Administered</string>
+    <string name="veterinarian_name">Veterinarian Name</string>
+    <string name="veterinarian_phone">Veterinarian Phone</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
+    <string name="task_deadline">Task Deadline</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="generate_livestock_report">Generate Livestock Report</string>
+    <string name="generate_nutrition_report">Generate Nutrition Report</string>
+    <string name="generate_health_report">Generate Health Report</string>
+
+    <string-array name="feed_type_array">
+        <item>Grass</item>
+        <item>Hay</item>
+        <item>Silage</item>
+        <item>Mineral Supplements</item>
+        <item>Vitamin Supplements</item>
+    </string-array>
+
+    <string-array name="health_status_array">
+        <item>Healthy</item>
+        <item>Unhealthy</item>
+    </string-array>
+    <string-array name="animal_type_array">
+        <item>Chicken</item>
+        <item>Cattle</item>
+        <item>Sheep</item>
+        <item>Goat</item>
+        <item>Pig</item>
+    </string-array>
+
+    <string-array name="breeding_methods_array">
+        <item>Natural</item>
+        <item>Artificial Insemination</item>
+    </string-array>
+</resources>

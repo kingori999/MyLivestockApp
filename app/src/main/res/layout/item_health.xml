@@ -1,0 +1,57 @@
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@drawable/edittext_bg">
+
+        <TextView
+            android:id="@+id/text_view_livestock_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Livestock Name"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/text_view_health_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_livestock_name"
+            android:text="Health Status"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_view_treatment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_health_status"
+            android:text="Treatment Administered"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_view_next_checkup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_treatment"
+            android:text="Next Checkup"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:backgroundTint="#C9FF5722"
+            android:text="Edit" />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_edit"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="3dp"
+            android:backgroundTint="#C9FF5722"
+            android:text="Delete" />
+    </RelativeLayout>
