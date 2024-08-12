@@ -30,6 +30,7 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_add"
+        android:backgroundTint="#C9FF5722"
         android:contentDescription="Add Health Record" />
 
 </RelativeLayout>

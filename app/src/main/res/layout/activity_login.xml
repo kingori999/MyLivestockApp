@@ -12,6 +12,7 @@
         android:src="@mipmap/logo"
         android:layout_gravity="center"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,6 +20,7 @@
         android:text="Login"
         android:textStyle="bold"
         android:layout_gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,9 +48,17 @@
         android:hint="Password"
         android:textColor="#000"
         android:textColorHint="#000"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/edittext_bg"
         android:inputType="textPassword" />
+
+    <!-- New Show Password Checkbox -->
+    <CheckBox
+        android:id="@+id/showPasswordCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:layout_marginBottom="40dp" />
 
     <Button
         android:id="@+id/loginButton"
@@ -57,6 +67,13 @@
         android:text="Login"
         android:layout_marginBottom="40dp"
         android:backgroundTint="#C9FF5722"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,13 +87,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
-
         android:backgroundTint="#C9FF5722"/>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone" />
 
 </LinearLayout>

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         // Handle Generate Reports button click
         generateReportsButton.setOnClickListener(v -> {
             // Code to generate reports goes here
-          startActivity(new Intent(MainActivity.this, ReportingActivity.class));
+          startActivity(new Intent(MainActivity.this, GenerateReportActivity.class));
             // Start the report generation activity or service
         });
     }

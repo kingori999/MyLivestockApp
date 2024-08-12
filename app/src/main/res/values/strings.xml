@@ -55,4 +55,12 @@
         <item>Natural</item>
         <item>Artificial Insemination</item>
     </string-array>
+
+    <string-array name="report_types_array">
+        <item>Livestock Inventory Report</item>
+        <item>Milk Production Report</item>
+        <item>Breeding Report</item>
+        <item>Health Records Report</item>
+        <item>Nutrition Records Report</item>
+    </string-array>
 </resources>

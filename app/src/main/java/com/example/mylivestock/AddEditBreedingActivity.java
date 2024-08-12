@@ -75,7 +75,10 @@ public class AddEditBreedingActivity extends AppCompatActivity {
     }
 
     private void loadLivestockIntoSpinners() {
+        String userId = mAuth.getCurrentUser().getUid();
+
         db.collection("livestock")
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<String> livestockNames = new ArrayList<>();

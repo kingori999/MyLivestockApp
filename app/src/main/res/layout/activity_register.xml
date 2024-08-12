@@ -10,15 +10,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/logo"
         android:src="@mipmap/logo"
-        android:layout_gravity="center"
-        />
+        android:layout_gravity="center" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="40dp"
-
         android:text="Register"
         android:textSize="40sp"
         android:textStyle="bold" />
@@ -43,14 +41,43 @@
         android:textColorHint="#000"
         android:background="@drawable/edittext_bg"
         android:inputType="textPassword"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="12dp" />
+
+    <!-- New Show Password Checkboxes -->
+    <CheckBox
+        android:id="@+id/showPasswordCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:layout_marginBottom="12dp" />
+
+
+    <!-- New Confirm Password Field -->
+    <EditText
+        android:id="@+id/confirmPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        android:background="@drawable/edittext_bg"
+        android:inputType="textPassword"
+        android:layout_marginBottom="12dp" />
+
+
+    <CheckBox
+        android:id="@+id/showConfirmPasswordCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Password"
+        android:layout_marginBottom="40dp" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:backgroundTint="#C9FF5722"/>
+        android:backgroundTint="#C9FF5722" />
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,10 +1,14 @@
 package com.example.mylivestock;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -20,7 +24,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton, registerButton;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private CheckBox showPasswordCheckBox;
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +41,23 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
         progressBar = findViewById(R.id.progressBar);
+        showPasswordCheckBox = findViewById(R.id.showPasswordCheckBox);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loginUser();
+            }
+        });
+
+        // Set up the checkbox to show or hide the password
+        showPasswordCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                // Show Password
+                passwordEditText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            } else {
+                // Hide Password
+                passwordEditText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         });
 

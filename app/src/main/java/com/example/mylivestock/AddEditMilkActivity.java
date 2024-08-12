@@ -62,7 +62,10 @@ public class AddEditMilkActivity extends AppCompatActivity {
     }
 
     private void loadLivestockIntoSpinner() {
+        String userId = mAuth.getCurrentUser().getUid(); // Get the logged-in user's ID
+
         db.collection("livestock")
+                .whereEqualTo("userId", userId) // Filter by userId
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<String> livestockNames = new ArrayList<>();

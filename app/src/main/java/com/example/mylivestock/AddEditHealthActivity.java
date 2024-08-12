@@ -65,7 +65,10 @@ public class AddEditHealthActivity extends AppCompatActivity {
     }
 
     private void loadLivestockIntoSpinner() {
+        String userId = mAuth.getCurrentUser().getUid();
+
         db.collection("livestock")
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     List<String> livestockNames = new ArrayList<>();
