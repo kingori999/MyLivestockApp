@@ -2,11 +2,14 @@ package com.example.mylivestock;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private TextView userEmailTextView;
     private Button logoutButton, generateReportsButton;
+    private FloatingActionButton btnHowToUse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,14 @@ public class MainActivity extends AppCompatActivity {
         logoutButton = findViewById(R.id.button_logout);
         generateReportsButton = findViewById(R.id.button_generate_reports);
         GridLayout gridLayout = findViewById(R.id.grid_layout);
+        btnHowToUse = findViewById(R.id.btnHowToUse);
+
+        btnHowToUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, HowToUse.class));
+            }
+        });
 
         if (currentUser != null) {
             userEmailTextView.setText(currentUser.getEmail());

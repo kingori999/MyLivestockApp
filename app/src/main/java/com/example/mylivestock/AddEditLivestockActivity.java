@@ -1,5 +1,6 @@
 package com.example.mylivestock;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,20 +17,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AddEditLivestockActivity extends AppCompatActivity {
 
-    public static final String EXTRA_ID = "com.example.livestockmanagement.EXTRA_ID";
-    public static final String EXTRA_NAME = "com.example.livestockmanagement.EXTRA_NAME";
-    public static final String EXTRA_TYPE = "com.example.livestockmanagement.EXTRA_TYPE";
-    public static final String EXTRA_BREED = "com.example.livestockmanagement.EXTRA_BREED";
-    public static final String EXTRA_HEALTH_STATUS = "com.example.livestockmanagement.EXTRA_HEALTH_STATUS";
+    public static final String EXTRA_ID = "com.example.mylivestock.EXTRA_ID";
+    public static final String EXTRA_NAME = "com.example.mylivestock.EXTRA_NAME";
+    public static final String EXTRA_TYPE = "com.example.mylivestock.EXTRA_TYPE";
+    public static final String EXTRA_HEALTH_STATUS = "com.example.mylivestock.EXTRA_HEALTH_STATUS";
 
-    private EditText editTextName;
-    private Spinner spinnerType;
-    private Spinner spinnerBreed;
-    private Spinner spinnerHealthStatus;
+
+    private EditText editTextName, editTextDateOfBirthOrPurchase;
+    private Spinner spinnerType, spinnerBreed, spinnerGender, spinnerBirthOrPurchase, spinnerHealthStatus;
     private LivestockViewModel livestockViewModel;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
@@ -43,6 +43,9 @@ public class AddEditLivestockActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.edit_text_name);
         spinnerType = findViewById(R.id.spinner_type);
         spinnerBreed = findViewById(R.id.spinner_breed);
+        spinnerGender = findViewById(R.id.spinner_gender);
+        spinnerBirthOrPurchase = findViewById(R.id.spinner_birth_or_purchase);
+        editTextDateOfBirthOrPurchase = findViewById(R.id.edit_text_date_of_birth_or_purchase);
         spinnerHealthStatus = findViewById(R.id.spinner_health_status);
         Button buttonSave = findViewById(R.id.button_save);
         Button buttonAddBreed = findViewById(R.id.button_add_breed);
@@ -60,6 +63,16 @@ public class AddEditLivestockActivity extends AppCompatActivity {
                 R.array.health_status_array, android.R.layout.simple_spinner_item);
         healthStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerHealthStatus.setAdapter(healthStatusAdapter);
+
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this,
+                R.array.gender_array, android.R.layout.simple_spinner_item);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerGender.setAdapter(genderAdapter);
+
+        ArrayAdapter<CharSequence> birthOrPurchaseAdapter = ArrayAdapter.createFromResource(this,
+                R.array.birth_or_purchase_array, android.R.layout.simple_spinner_item);
+        birthOrPurchaseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBirthOrPurchase.setAdapter(birthOrPurchaseAdapter);
 
         livestockViewModel = new ViewModelProvider(this).get(LivestockViewModel.class);
 
@@ -80,11 +93,28 @@ public class AddEditLivestockActivity extends AppCompatActivity {
             }
         });
 
+        setupDateOfBirthOrPurchasePicker();
+
         buttonSave.setOnClickListener(v -> saveLivestock(id));
 
         buttonAddBreed.setOnClickListener(v -> {
             AddBreedDialog dialog = new AddBreedDialog(spinnerType.getSelectedItem().toString());
             dialog.show(getSupportFragmentManager(), "AddBreedDialog");
+        });
+    }
+
+    private void setupDateOfBirthOrPurchasePicker() {
+        editTextDateOfBirthOrPurchase.setOnClickListener(v -> {
+            final Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    AddEditLivestockActivity.this,
+                    (view, year1, monthOfYear, dayOfMonth) -> editTextDateOfBirthOrPurchase.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year1),
+                    year, month, day);
+            datePickerDialog.show();
         });
     }
 
@@ -107,15 +137,20 @@ public class AddEditLivestockActivity extends AppCompatActivity {
         String type = spinnerType.getSelectedItem().toString();
         String breed = spinnerBreed.getSelectedItem().toString();
         String healthStatus = spinnerHealthStatus.getSelectedItem().toString();
+        String gender = spinnerGender.getSelectedItem().toString();
+        String birthOrPurchaseStatus = spinnerBirthOrPurchase.getSelectedItem().toString();
+        String birthOrPurchaseDate = editTextDateOfBirthOrPurchase.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(type) || TextUtils.isEmpty(breed) || TextUtils.isEmpty(healthStatus)) {
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(type) || TextUtils.isEmpty(breed) || TextUtils.isEmpty(healthStatus)
+                || TextUtils.isEmpty(gender) || TextUtils.isEmpty(birthOrPurchaseStatus) || TextUtils.isEmpty(birthOrPurchaseDate)) {
+            // Handle error (e.g., show a Toast)
             return;
         }
 
         // Get the logged-in user's ID
         String userId = auth.getCurrentUser().getUid();
 
-        Livestock livestock = new Livestock(name, type, breed, healthStatus, userId);
+        Livestock livestock = new Livestock(name, type, breed, healthStatus, userId, gender, birthOrPurchaseStatus, birthOrPurchaseDate);
 
         if (id != null) {
             livestock.setId(id);

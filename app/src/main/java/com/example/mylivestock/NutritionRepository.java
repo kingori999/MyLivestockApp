@@ -1,8 +1,11 @@
 package com.example.mylivestock;
 
 import android.app.Application;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.example.mylivestock.Nutrition;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -19,17 +22,19 @@ public class NutritionRepository {
         nutritionCollection = db.collection("nutrition");
     }
 
-    public LiveData<List<Nutrition>> getAllNutrition() {
+    public LiveData<List<Nutrition>> getAllNutrition(String userId) {
         MutableLiveData<List<Nutrition>> liveData = new MutableLiveData<>();
-        nutritionCollection.orderBy("dateTime").get().addOnSuccessListener(queryDocumentSnapshots -> {
+        nutritionCollection.whereEqualTo("userId", userId).get().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Nutrition> nutritionList = new ArrayList<>();
             for (DocumentSnapshot document : queryDocumentSnapshots) {
                 Nutrition nutrition = document.toObject(Nutrition.class);
                 nutrition.setId(document.getId());
                 nutritionList.add(nutrition);
             }
+            //log to confirm data retrieval
+
             liveData.setValue(nutritionList);
-        });
+        }).addOnFailureListener(e -> Log.e("NutritionRepository", "Error fetching data",e));
         return liveData;
     }
 

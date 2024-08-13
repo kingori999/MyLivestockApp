@@ -14,7 +14,6 @@ public class NutritionViewModel extends AndroidViewModel {
     public NutritionViewModel(@NonNull Application application) {
         super(application);
         repository = new NutritionRepository(application);
-        allNutrition = repository.getAllNutrition();
     }
 
     public void insert(Nutrition nutrition) {
@@ -29,7 +28,7 @@ public class NutritionViewModel extends AndroidViewModel {
         repository.delete(nutrition);
     }
 
-    public LiveData<List<Nutrition>> getAllNutrition() {
-        return allNutrition;
+    public LiveData<List<Nutrition>> getAllNutrition(String userId) {
+        return repository.getAllNutrition(userId);
     }
 }

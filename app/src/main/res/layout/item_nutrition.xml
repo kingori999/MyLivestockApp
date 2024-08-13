@@ -9,10 +9,10 @@
 
 
     <TextView
-        android:id="@+id/text_view_livestock_name"
+        android:id="@+id/text_view_animal_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Livestock Name"
+        android:text="Animal type"
         android:textStyle="bold"
         android:textSize="18sp" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/text_view_feed_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_view_livestock_name"
+        android:layout_below="@id/text_view_animal_type"
         android:text="Feed Type"
         android:textSize="16sp" />
 
@@ -50,7 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:backgroundTint="#C9FF5722"
-        android:text="Edit" />
+        android:text="Edit"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/button_delete"

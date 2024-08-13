@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select animal by name here"
+        android:text="Select female animal by name"
         android:textSize="20sp"
         android:layout_gravity="center"/>
     <Spinner
@@ -24,22 +24,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_bg"
-        android:layout_marginBottom="12dp"
-         />
+        android:layout_marginBottom="12dp"/>
 
-    <!-- Male Livestock Spinner -->
+    <!-- Breeding Method Spinner -->
     <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Select the male animal of breeding"
-    android:textSize="20sp"
-    android:layout_gravity="center"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breeding Method"
+        android:textSize="20sp"
+        android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Male Livestock Spinner (Visible only for 'Natural' Method) -->
+    <TextView
+        android:id="@+id/text_view_male_livestock_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select the male animal for breeding"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
     <Spinner
         android:id="@+id/spinner_male_livestock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/edittext_bg"/>
+        android:background="@drawable/edittext_bg"
+        android:visibility="gone"/>
 
     <!-- DatePicker for Breeding Date -->
     <TextView
@@ -48,7 +64,6 @@
         android:text="Select Date of Breeding"
         android:layout_gravity="center"
         android:textSize="20sp"/>
-
     <DatePicker
         android:id="@+id/date_picker_breeding_date"
         android:layout_width="match_parent"
@@ -57,32 +72,7 @@
         android:datePickerMode="spinner" />
 
     <!-- Expected Due Date TextView -->
-    <TextView
-        android:id="@+id/text_view_expected_due_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Expected Due Date"
-        android:visibility="gone"
-        android:textSize="20sp"
-        android:layout_marginBottom="12dp"
-        android:textStyle="bold"
-        android:paddingTop="16dp" />
 
-    <!-- Method Spinner -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Breeding Method"
-        android:textSize="20sp"
-        android:layout_marginTop="12dp"
-        android:layout_gravity="center"/>
-    <Spinner
-        android:id="@+id/spinner_method"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:background="@drawable/edittext_bg"
-        android:layout_marginBottom="12dp"/>
 
     <!-- Save Button -->
     <Button

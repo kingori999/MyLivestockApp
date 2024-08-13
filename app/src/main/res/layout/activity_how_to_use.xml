@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+   >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@drawable/rounded_corner_background">
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How to Use the Livestock Management System"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:paddingBottom="16dp"
+            android:layout_gravity="center_horizontal" />
+
+
+
+        <!-- Livestock Inventory Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Livestock Inventory"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• View Livestock: Access a list of all your livestock, including their name, type, breed, and health status.\n• Add Livestock: Use the 'Add Livestock' button to enter details for a new animal.\n• Delete Livestock: Use the delete button to remove it from the database.\n• Search Livestock: Use the search bar to quickly find livestock by name.\n• Generate Livestock Report: Create and download a PDF report of your livestock inventory."
+            android:textSize="16sp"
+            android:paddingBottom="12dp"
+            android:textColor="#000" />
+
+<!--   Nutrition and Feeding     -->
+        <TextView
+            android:id="@+id/text_view_nutrition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nutrition and Feeding"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_view_nutrition_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Monitor and record the nutrition details of your livestock. This includes recording the type of feed, quantity, and feeding times. Keeping track of nutrition helps ensure that your animals receive the proper diet and maintain optimal health."
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Milk Production Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Milk Production Management"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• View Milk Production Records: Access and review the records of milk production for all livestock.\n• Add Milk Production Record: Record daily milk production by selecting the livestock, entering the quantity produced, and specifying the date and time.\n• Edit/Delete Records: Modify or remove existing milk production records.\n• Generate Milk Production Report: Generate a PDF report summarizing the milk production records."
+            android:textSize="16sp"
+            android:paddingBottom="12dp"
+            android:textColor="#000" />
+
+        <!-- Additional Sections Here... -->
+<!--   Health section     -->
+        <TextView
+            android:id="@+id/text_view_health"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Health"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_view_health_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Track and manage the health records of your livestock. You can add new health records, view past records, and update the health status of your animals. Ensure that your livestock stays healthy by keeping an accurate history of their medical checkups and treatments."
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+<!--Breeds-->
+
+        <TextView
+            android:id="@+id/text_view_breeds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Breeds"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_view_breeds_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage the different breeds of livestock in your farm. You can add new breeds to your records, view existing ones, and associate them with specific animals during the registration process. Keeping track of breeds helps you monitor the genetic diversity and characteristics of your livestock."
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+<!--        Tasks-->
+        <TextView
+            android:id="@+id/text_view_tasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tasks"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/text_view_tasks_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage daily tasks related to livestock care. You can assign tasks such as feeding, cleaning, and health checkups to specific dates and animals. This section helps you stay organized and ensure that all necessary tasks are completed on time."
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Reports Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reports"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• Generate Reports: Select the type of report you want to generate (e.g., Livestock Inventory, Milk Production, Breeding, Health Records, Nutrition, Tasks).\n• Download PDF: Once generated, the report can be downloaded as a PDF file. You’ll be prompted to open the PDF immediately after it’s created."
+            android:textSize="16sp"
+            android:paddingBottom="12dp"
+            android:textColor="#000" />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

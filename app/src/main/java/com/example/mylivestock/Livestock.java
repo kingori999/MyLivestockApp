@@ -6,7 +6,10 @@ public class Livestock {
     private String type;
     private String breed;
     private String healthStatus;
-    private String userId; // Added field
+    private String userId;
+    private String gender;
+    private String birthOrPurchaseStatus;
+    private String birthOrPurchaseDate;// Added field
 
     // Constructor, getters, and setters...
 
@@ -14,12 +17,16 @@ public class Livestock {
         // Empty constructor needed for Firestore
     }
 
-    public Livestock(String name, String type, String breed, String healthStatus, String userId) {
+    public Livestock(String name, String type, String breed, String healthStatus, String userId, String gender, String birthOrPurchaseStatus, String birthOrPurchaseDate) {
         this.name = name;
         this.type = type;
         this.breed = breed;
         this.healthStatus = healthStatus;
         this.userId = userId;
+        this.gender = gender;
+        this.birthOrPurchaseStatus = birthOrPurchaseStatus;
+        this.birthOrPurchaseDate = birthOrPurchaseDate;
+
     }
 
     public String getId() {
@@ -68,5 +75,29 @@ public class Livestock {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthOrPurchaseStatus() {
+        return birthOrPurchaseStatus;
+    }
+
+    public void setBirthOrPurchaseStatus(String birthOrPurchaseStatus) {
+        this.birthOrPurchaseStatus = birthOrPurchaseStatus;
+    }
+
+    public String getBirthOrPurchaseDate() {
+        return birthOrPurchaseDate;
+    }
+
+    public void setBirthOrPurchaseDate(String birthOrPurchaseDate) {
+        this.birthOrPurchaseDate = birthOrPurchaseDate;
     }
 }

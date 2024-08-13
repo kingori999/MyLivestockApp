@@ -16,12 +16,17 @@
         android:id="@+id/edit_text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="Name of the animal"
         android:textColorHint="#000"
         android:textColor="#000"
         android:layout_marginBottom="8dp"
         android:background="@drawable/edittext_bg"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select animal type"
+        android:layout_gravity="center"/>
     <Spinner
         android:id="@+id/spinner_type"
         android:layout_width="match_parent"
@@ -30,6 +35,11 @@
 
         android:layout_marginBottom="8dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select breed"
+        android:layout_gravity="center"/>
     <Spinner
         android:id="@+id/spinner_breed"
         android:layout_width="match_parent"
@@ -39,6 +49,11 @@
         android:layout_marginBottom="8dp"/>
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animal health status"
+        android:layout_gravity="center"/>
     <Spinner
         android:id="@+id/spinner_health_status"
         android:layout_width="match_parent"
@@ -46,6 +61,43 @@
         android:background="@drawable/edittext_bg"
 
         android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Origin (bought or purchased)"
+        android:layout_gravity="center"/>
+    <Spinner
+        android:id="@+id/spinner_birth_or_purchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_bg"
+
+        android:layout_marginBottom="8dp"/>
+
+   <EditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Date of Birth/Purchase"
+       android:id="@+id/edit_text_date_of_birth_or_purchase"
+       android:focusable="false"
+       android:clickable="true"
+       android:background="@drawable/edittext_bg"/>
+
+
 
     <TextView
         android:layout_width="wrap_content"

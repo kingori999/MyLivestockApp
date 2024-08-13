@@ -3,25 +3,26 @@ package com.example.mylivestock;
 public class Nutrition {
 
     private String id;
-    private String livestockName;
+    private String animalType;
     private String feedType;
     private String quantity;
-    private String dateTime;
+    private String time;
     private String userId;
 
     public Nutrition() {
-        // Default constructor required for calls to DataSnapshot.getValue(Nutrition.class)
+        // Required empty constructor for Firestore
     }
 
-    public Nutrition(String livestockName, String feedType, String quantity, String dateTime, String userId) {
-        this.livestockName = livestockName;
+    public Nutrition(String animalType, String feedType, String quantity, String time, String userId) {
+        this.animalType = animalType;
         this.feedType = feedType;
         this.quantity = quantity;
-        this.dateTime = dateTime;
+        this.time = time;
         this.userId = userId;
     }
 
-    // Getters and Setters for all fields
+    // Getters and Setters
+
 
     public String getId() {
         return id;
@@ -31,12 +32,12 @@ public class Nutrition {
         this.id = id;
     }
 
-    public String getLivestockName() {
-        return livestockName;
+    public String getAnimalType() {
+        return animalType;
     }
 
-    public void setLivestockName(String livestockName) {
-        this.livestockName = livestockName;
+    public void setAnimalType(String animalType) {
+        this.animalType = animalType;
     }
 
     public String getFeedType() {
@@ -55,12 +56,12 @@ public class Nutrition {
         this.quantity = quantity;
     }
 
-    public String getDateTime() {
-        return dateTime;
+    public String getTime() {
+        return time;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getUserId() {

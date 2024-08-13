@@ -14,7 +14,7 @@ public class BreedingViewModel extends AndroidViewModel {
     public BreedingViewModel(@NonNull Application application) {
         super(application);
         repository = new BreedingRepository(application);
-        allBreedingRecords = repository.getAllBreedingRecords();
+
     }
 
     public void insert(BreedingRecord breedingRecord) {
@@ -29,7 +29,7 @@ public class BreedingViewModel extends AndroidViewModel {
         repository.delete(breedingRecord);
     }
 
-    public LiveData<List<BreedingRecord>> getAllBreedingRecords() {
-        return allBreedingRecords;
+    public LiveData<List<BreedingRecord>> getAllBreedingRecords(String userId) {
+        return repository.getAllBreedingRecords(userId);
     }
 }

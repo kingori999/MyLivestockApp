@@ -63,4 +63,14 @@
         <item>Health Records Report</item>
         <item>Nutrition Records Report</item>
     </string-array>
+
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="birth_or_purchase_array">
+        <item>Born</item>
+        <item>Bought</item>
+    </string-array>
 </resources>

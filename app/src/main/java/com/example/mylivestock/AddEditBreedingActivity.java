@@ -2,15 +2,17 @@ package com.example.mylivestock;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,21 +20,20 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AddEditBreedingActivity extends AppCompatActivity {
 
-    private Spinner spinnerFemaleLivestock, spinnerMaleLivestock, spinnerMethod;
+    private Spinner spinnerFemaleLivestock;
+    private Spinner spinnerMaleLivestock;
+    private Spinner spinnerMethod;
     private DatePicker datePickerBreedingDate;
-    private TextView textViewExpectedDueDate;
     private Button buttonSave;
-
     private FirebaseFirestore db;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth auth;
     private BreedingViewModel breedingViewModel;
-    private String breedingId = null;
+    private List<String> femaleLivestockList;
+    private List<String> maleLivestockList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,132 +42,183 @@ public class AddEditBreedingActivity extends AppCompatActivity {
 
         spinnerFemaleLivestock = findViewById(R.id.spinner_female_livestock);
         spinnerMaleLivestock = findViewById(R.id.spinner_male_livestock);
-        datePickerBreedingDate = findViewById(R.id.date_picker_breeding_date);
         spinnerMethod = findViewById(R.id.spinner_method);
-        textViewExpectedDueDate = findViewById(R.id.text_view_expected_due_date);
+        datePickerBreedingDate = findViewById(R.id.date_picker_breeding_date);
         buttonSave = findViewById(R.id.button_save);
 
         db = FirebaseFirestore.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+        auth = FirebaseAuth.getInstance();
         breedingViewModel = new ViewModelProvider(this).get(BreedingViewModel.class);
 
-        loadLivestockIntoSpinners();
-        setupBreedingMethodSpinner();
+        femaleLivestockList = new ArrayList<>();
+        maleLivestockList = new ArrayList<>();
 
-        if (getIntent().hasExtra("breedingId")) {
-            breedingId = getIntent().getStringExtra("breedingId");
-            loadBreedingData(breedingId);
-        }
+        loadFemaleLivestock();
+        loadBreedingMethods();
 
-        datePickerBreedingDate.init(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+        spinnerMethod.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinnerMethod.getSelectedItem().toString().equals("Natural")) {
+                    spinnerMaleLivestock.setVisibility(View.VISIBLE);
+                    loadMaleLivestock();
+                } else {
+                    spinnerMaleLivestock.setVisibility(View.GONE);
+                }
+            }
 
             @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year, monthOfYear, dayOfMonth);
-                calendar.add(Calendar.DAY_OF_MONTH, 283); // Average gestation period for cows (283 days)
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String expectedDueDate = sdf.format(calendar.getTime());
-                textViewExpectedDueDate.setText("Expected Due Date: " + expectedDueDate);
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
             }
         });
 
         buttonSave.setOnClickListener(v -> saveBreedingRecord());
     }
 
-    private void loadLivestockIntoSpinners() {
-        String userId = mAuth.getCurrentUser().getUid();
-
+    private void loadFemaleLivestock() {
         db.collection("livestock")
-                .whereEqualTo("userId", userId)
+                .whereEqualTo("gender", "Female")
+                .whereEqualTo("userId", auth.getCurrentUser().getUid())
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
-                    List<String> livestockNames = new ArrayList<>();
-                    for (DocumentSnapshot document : queryDocumentSnapshots) {
-                        String name = document.getString("name");
-                        livestockNames.add(name);
+                    femaleLivestockList.clear();
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        femaleLivestockList.add(doc.getString("name"));
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, livestockNames);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerFemaleLivestock.setAdapter(adapter);
-                    spinnerMaleLivestock.setAdapter(adapter);
+                    ArrayAdapter<String> femaleAdapter = new ArrayAdapter<>(this,
+                            android.R.layout.simple_spinner_item, femaleLivestockList);
+                    femaleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerFemaleLivestock.setAdapter(femaleAdapter);
                 })
-                .addOnFailureListener(e -> Toast.makeText(AddEditBreedingActivity.this, "Failed to load livestock", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to load female livestock: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
-    private void setupBreedingMethodSpinner() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.breeding_methods_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerMethod.setAdapter(adapter);
-    }
-
-    private void loadBreedingData(String breedingId) {
-        db.collection("breedingRecords").document(breedingId)
+    private void loadMaleLivestock() {
+        db.collection("livestock")
+                .whereEqualTo("gender", "Male")
+                .whereEqualTo("userId", auth.getCurrentUser().getUid())
                 .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String femaleLivestockName = documentSnapshot.getString("femaleLivestockName");
-                        String maleLivestockName = documentSnapshot.getString("maleLivestockName");
-                        String breedingDate = documentSnapshot.getString("breedingDate");
-                        String method = documentSnapshot.getString("method");
-                        String expectedDueDate = documentSnapshot.getString("expectedDueDate");
-
-                        // Populate the fields with existing data
-                        ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinnerFemaleLivestock.getAdapter();
-                        int femalePosition = adapter.getPosition(femaleLivestockName);
-                        spinnerFemaleLivestock.setSelection(femalePosition);
-
-                        int malePosition = adapter.getPosition(maleLivestockName);
-                        spinnerMaleLivestock.setSelection(malePosition);
-
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                        try {
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(sdf.parse(breedingDate));
-                            datePickerBreedingDate.updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                        ArrayAdapter<CharSequence> methodAdapter = (ArrayAdapter<CharSequence>) spinnerMethod.getAdapter();
-                        int methodPosition = methodAdapter.getPosition(method);
-                        spinnerMethod.setSelection(methodPosition);
-
-                        textViewExpectedDueDate.setText("Expected Due Date: " + expectedDueDate);
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    maleLivestockList.clear();
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        maleLivestockList.add(doc.getString("name"));
                     }
+                    ArrayAdapter<String> maleAdapter = new ArrayAdapter<>(this,
+                            android.R.layout.simple_spinner_item, maleLivestockList);
+                    maleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerMaleLivestock.setAdapter(maleAdapter);
                 })
-                .addOnFailureListener(e -> Toast.makeText(AddEditBreedingActivity.this, "Failed to load breeding data", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Failed to load male livestock: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void loadBreedingMethods() {
+        ArrayAdapter<CharSequence> methodAdapter = ArrayAdapter.createFromResource(this,
+                R.array.breeding_methods_array, android.R.layout.simple_spinner_item);
+        methodAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMethod.setAdapter(methodAdapter);
     }
 
     private void saveBreedingRecord() {
         String femaleLivestockName = spinnerFemaleLivestock.getSelectedItem().toString();
-        String maleLivestockName = spinnerMaleLivestock.getSelectedItem().toString();
-        String method = spinnerMethod.getSelectedItem().toString();
+        String breedingMethod = spinnerMethod.getSelectedItem().toString();
+        String maleLivestockName = breedingMethod.equals("Natural") ? spinnerMaleLivestock.getSelectedItem().toString() : "N/A";
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(datePickerBreedingDate.getYear(), datePickerBreedingDate.getMonth(), datePickerBreedingDate.getDayOfMonth());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String breedingDate = sdf.format(calendar.getTime());
-        String expectedDueDate = textViewExpectedDueDate.getText().toString().replace("Expected Due Date: ", "");
-
-        if (TextUtils.isEmpty(femaleLivestockName) || TextUtils.isEmpty(maleLivestockName)) {
-            Toast.makeText(this, "Please select livestock", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(femaleLivestockName) || TextUtils.isEmpty(breedingMethod)) {
+            Toast.makeText(this, "Please fill all the required fields", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String userId = mAuth.getCurrentUser().getUid();
-        BreedingRecord breedingRecord = new BreedingRecord(femaleLivestockName, maleLivestockName, breedingDate, expectedDueDate, method, userId);
+        // Get the current date from the DatePicker
+        int day = datePickerBreedingDate.getDayOfMonth();
+        int month = datePickerBreedingDate.getMonth();
+        int year = datePickerBreedingDate.getYear();
+        Calendar breedingDateCalendar = Calendar.getInstance();
+        breedingDateCalendar.set(year, month, day);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String breedingDate = dateFormat.format(breedingDateCalendar.getTime());
 
-        if (breedingId != null) {
-            breedingRecord.setId(breedingId);
-            breedingViewModel.update(breedingRecord);
-            Toast.makeText(this, "Breeding record updated successfully", Toast.LENGTH_SHORT).show();
-        } else {
-            breedingViewModel.insert(breedingRecord);
-            Toast.makeText(this, "Breeding record added successfully", Toast.LENGTH_SHORT).show();
-        }
+        // The due date calculation section is hidden for now
+        /*
+        getAnimalType(femaleLivestockName, animalType -> {
+            if (animalType != null) {
+                int gestationPeriod = getGestationPeriod(animalType);
+                if (gestationPeriod > 0) {
+                    Calendar dueDateCalendar = (Calendar) breedingDateCalendar.clone();
+                    dueDateCalendar.add(Calendar.DAY_OF_YEAR, gestationPeriod);
+                    String expectedDueDate = dateFormat.format(dueDateCalendar.getTime());
 
+                    // Get the logged-in user's ID
+                    String userId = auth.getCurrentUser().getUid();
+
+                    BreedingRecord breedingRecord = new BreedingRecord(femaleLivestockName, maleLivestockName, breedingDate, expectedDueDate, breedingMethod, userId);
+
+                    breedingViewModel.insert(breedingRecord);
+                    finish();
+                } else {
+                    Toast.makeText(AddEditBreedingActivity.this, "Unable to calculate the due date for the selected animal type.", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(AddEditBreedingActivity.this, "Failed to determine the animal type", Toast.LENGTH_SHORT).show();
+            }
+        });
+        */
+
+        // Save the basic breeding info without calculating due date
+        String userId = auth.getCurrentUser().getUid();
+        BreedingRecord breedingRecord = new BreedingRecord(femaleLivestockName, maleLivestockName, breedingDate, "N/A", breedingMethod, userId);
+        breedingViewModel.insert(breedingRecord);
         finish();
     }
+
+    // You may also comment out or remove the getAnimalType method if not in use
+    /*
+    private void getAnimalType(String livestockName, AnimalTypeCallback callback) {
+        db.collection("livestock")
+                .whereEqualTo("name", livestockName)
+                .whereEqualTo("userId", auth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!queryDocumentSnapshots.isEmpty()) {
+                        DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                        String animalType = documentSnapshot.getString("type");
+                        callback.onCallback(animalType);
+                    } else {
+                        callback.onCallback(null); // No result found
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(AddEditBreedingActivity.this, "Error fetching animal type: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    callback.onCallback(null); // In case of error
+                });
+    }
+
+    private int getGestationPeriod(String animalType) {
+        switch (animalType) {
+            case "Cow":
+                return 279;
+            case "Pig":
+                return 114;
+            case "Goat":
+                return 150;
+            case "Sheep":
+                return 152;
+            case "Horse":
+                return 336;
+            default:
+                return 0; // Default value, handle this case separately
+        }
+    }
+    */
+
+    // You can also comment out or remove the AnimalTypeCallback interface if not used
+    /*
+    public interface AnimalTypeCallback {
+        void onCallback(String animalType);
+    }
+    */
 }

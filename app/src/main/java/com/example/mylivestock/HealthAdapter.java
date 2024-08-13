@@ -34,7 +34,7 @@ public class HealthAdapter extends RecyclerView.Adapter<HealthAdapter.HealthView
         holder.livestockNameTextView.setText("Animal Name: " +health.getLivestockName());
         holder.healthStatusTextView.setText("Health Status: " +health.getHealthStatus());
         holder.treatmentTextView.setText("Treatment given: " +health.getTreatment());
-        holder.nextCheckupTextView.setText("Next checkup date: " +health.getNextCheckupDate());
+        holder.nextCheckupTextView.setText("Next checkup date: " + health.getNextCheckupDate());
 
         holder.editButton.setOnClickListener(v -> {
             if (context instanceof HealthActivity) {

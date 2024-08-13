@@ -9,17 +9,22 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
 public class BreedingActivity extends AppCompatActivity {
 
     private BreedingViewModel breedingViewModel;
     private BreedingAdapter adapter;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breeding);
+
+        auth = FirebaseAuth.getInstance();
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view_breeding);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -29,7 +34,7 @@ public class BreedingActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         breedingViewModel = new ViewModelProvider(this).get(BreedingViewModel.class);
-        breedingViewModel.getAllBreedingRecords().observe(this, new Observer<List<BreedingRecord>>() {
+        breedingViewModel.getAllBreedingRecords(auth.getCurrentUser().getUid()).observe(this, new Observer<List<BreedingRecord>>() {
             @Override
             public void onChanged(List<BreedingRecord> breedingRecords) {
                 adapter.setBreedingList(breedingRecords);

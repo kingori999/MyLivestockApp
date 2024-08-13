@@ -100,8 +100,11 @@ public class GenerateReportActivity extends AppCompatActivity {
                                 String name = document.getString("name");
                                 String type = document.getString("type");
                                 String breed = document.getString("breed");
+                                String gender = document.getString("gender");
+                                String birthOrPurchaseStatus = document.getString("birthOrPurchaseStatus");
+                                String birthOrPurchaseDate = document.getString("birthOrPurchaseDate");
                                 String healthStatus = document.getString("healthStatus");
-                                data.add(name + " | " + type + " | " + breed + " | " + healthStatus);
+                                data.add(name + " | " + type + " | " + breed + " | " + gender + " | " + birthOrPurchaseStatus + " | " + birthOrPurchaseDate + " | " + healthStatus);
                             }
                             displayReportContent(data);
                         })
@@ -138,7 +141,7 @@ public class GenerateReportActivity extends AppCompatActivity {
                                 String maleLivestockName = document.getString("maleLivestockName");
                                 String breedingDate = document.getString("breedingDate");
                                 String expectedDueDate = document.getString("expectedDueDate");
-                                data.add(femaleLivestockName + " | " + maleLivestockName + " | " + breedingDate);
+                                data.add(femaleLivestockName + " | " + maleLivestockName + " | " + breedingDate + " | " + expectedDueDate);
                             }
                             displayReportContent(data);
                         })
@@ -228,11 +231,13 @@ public class GenerateReportActivity extends AppCompatActivity {
             Table table;
             switch (reportType) {
                 case "Livestock Inventory Report":
-                    table = new Table(new float[]{3, 3, 3, 3});
+                    table = new Table(new float[]{3, 3, 3, 3, 3, 3, 3});
                     table.addHeaderCell(new Cell().add(new Paragraph("Name")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     table.addHeaderCell(new Cell().add(new Paragraph("Type")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     table.addHeaderCell(new Cell().add(new Paragraph("Breed")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
-
+                    table.addHeaderCell(new Cell().add(new Paragraph("Gender")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
+                    table.addHeaderCell(new Cell().add(new Paragraph("Birth/Purchase Status")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
+                    table.addHeaderCell(new Cell().add(new Paragraph("Birth/Purchase Date")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     table.addHeaderCell(new Cell().add(new Paragraph("Health Status")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     break;
 
@@ -261,10 +266,10 @@ public class GenerateReportActivity extends AppCompatActivity {
 
                 case "Nutrition Records Report":
                     table = new Table(new float[]{4, 3, 2, 3});
-                    table.addHeaderCell(new Cell().add(new Paragraph("Livestock Name")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
+                    table.addHeaderCell(new Cell().add(new Paragraph("Animal Type")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     table.addHeaderCell(new Cell().add(new Paragraph("Feed Type")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     table.addHeaderCell(new Cell().add(new Paragraph("Quantity")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
-                    table.addHeaderCell(new Cell().add(new Paragraph("Date")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
+                    table.addHeaderCell(new Cell().add(new Paragraph("Date and Time")).setBackgroundColor(ColorConstants.LIGHT_GRAY));
                     break;
 
                 default:
@@ -318,5 +323,4 @@ public class GenerateReportActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "No PDF viewer available", Toast.LENGTH_SHORT).show();
         }
-    }
-}
+    }}

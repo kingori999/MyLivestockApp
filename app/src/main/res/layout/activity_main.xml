@@ -204,4 +204,14 @@
         android:textSize="16sp"
         android:backgroundTint="#C9FF5722"
         android:elevation="6dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnHowToUse"
+        android:src="@drawable/ic_help"
+        android:backgroundTint="#C9FF5722"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="18dp"/>
 </RelativeLayout>
